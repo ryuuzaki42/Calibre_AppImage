@@ -1,0 +1,61 @@
+name: Create new realease
+
+on:
+  push:
+    branches:
+      - "**"
+    tags:
+      - "!**"
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - name: Install fuse libfuse2
+      run: sudo apt install fuse libfuse2
+
+    - name: Construct AppDir
+      run: |
+        set -x
+        make
+
+    - name: Get appimagetool
+      run: |
+        set -x
+        wget https://github.com/AppImage/AppImageKit/releases/download/13/appimagetool-x86_64.AppImage
+        chmod +x appimagetool-x86_64.AppImage
+
+    - name: Make AppImage
+      run:  |
+       set -x
+       ./appimagetool-x86_64.AppImage build/calibre.AppDir
+
+    - name: List files and rename AppImage
+      run: |
+        set -x
+        pwd
+        ls -lah
+        version=$(cat version)
+        mv Calibre-x86_64.AppImage "Calibre-$version-x86_64-1_JB.AppImage"
+        md5sum "Calibre-$version-x86_64-1_JB.AppImage" > "Calibre-$version-x86_64-1_JB.AppImage.md5"
+        ls -lah
+
+    # Build - Errror: Resource not accessible by integration
+    # Change Settings -> Actions -> General -> Workflow Permissions to allow read and write:
+    # https://github.com/actions/first-interaction/issues/10#issuecomment-1506118886
+
+    # https://github.com/marketplace/actions/upload-to-github-release
+    - uses: xresloader/upload-to-github-release@main
+      env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+          #file: "Calibre-6.22.0-x86_64.AppImage"
+          file: "Calibre*.AppImage; Calibre*.md5"
+          #delete_file: "random-name-*.txt;random-*.txt"
+          release_id: ${{ steps.create_release.outputs.id }}
+          #overwrite: true
+          verbose: true
+          #tags: true
+          draft: false
