@@ -1,9 +1,11 @@
 .PHONY: all
 
-VERSION= 6.25.0
+#version= 6.25.0
 
 all:	
-	echo "$(VERSION)"
+	#echo "$(version)"
+	version=$(grep -o "Calibre:.*" README.md | cut -d ' ' -f2)
+        echo "Calibre version: $version"
 	echo "$(VERSION)" > version
 
 	rm -rf build/
