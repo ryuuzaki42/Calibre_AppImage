@@ -6,7 +6,8 @@ all:
 	#echo "$(version)"
 	version=$(grep -o "Calibre:.*" README.md | cut -d ' ' -f2)
         echo "Calibre version: $version"
-	echo "$(VERSION)" > version
+	echo "$(version)" > version
+	cat version
 
 	rm -rf build/
 	mkdir -p build/calibre.AppDir/
