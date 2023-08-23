@@ -97,4 +97,3 @@ jobs:
           draft: false
           default_release_name: "Calibre $version "
           tag_name: ${{ github.ref }}
-          release_name: Calibre2 ${{ github.ref }}
