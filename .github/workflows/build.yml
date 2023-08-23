@@ -16,19 +16,29 @@ jobs:
     - name: Install fuse libfuse2
       run: sudo apt install fuse libfuse2
 
-    - name: Construct AppDir
+    - name: Make Calibre AppDir
       run: |
         set -x
-        #make
-
         version=$(grep -o "Calibre:.*" README.md | cut -d ' ' -f2)
         echo "Calibre version: $version"
-        echo "$version" > version
 
         #rm -rf build/
         mkdir -p build/calibre.AppDir/
 
-        cp calibre.desktop build/calibre.AppDir/
+        #cp calibre.desktop build/calibre.AppDir/
+
+        cat > build/calibre.AppDir/calibre.desktop << 'EOF'
+        [Desktop Entry]
+        Type=Application
+        Name=Calibre
+        Comment=E-Book Management
+        Exec=calibre %F
+        Icon=calibre
+        MimeType=application/x-mobipocket-ebook;application/epub+zip;x-content/ebook-reader
+        Categories=Office;Graphics;Viewer
+        EOF
+
+        chmod +x build/calibre.AppDir/calibre.desktop
 
         curl --location -o build/calibre.AppDir/AppRun https://github.com/AppImage/AppImageKit/releases/download/continuous/AppRun-x86_64
         chmod +x build/calibre.AppDir/AppRun
@@ -44,7 +54,6 @@ jobs:
         ls -lah
 
         cp build/calibre.AppDir/usr/bin/resources/content-server/calibre.png build/calibre.AppDir
-        
         cp README.md build/calibre.AppDir
 
     - name: Get appimagetool
