@@ -42,7 +42,7 @@ jobs:
 
         curl --location -o build/calibre.AppDir/AppRun https://github.com/AppImage/AppImageKit/releases/download/continuous/AppRun-x86_64
         chmod +x build/calibre.AppDir/AppRun
-        
+
         mkdir -p build/calibre.AppDir/usr/bin/
         cd build/calibre.AppDir/usr/bin/
         curl -o - https://download.calibre-ebook.com/$version/calibre-$version-x86_64.txz | tar -xJf -
@@ -90,8 +90,9 @@ jobs:
       with:
           file: "Calibre*.AppImage; Calibre*.md5"
           #delete_file: "random-name-*.txt;random-*.txt"
-          release_id: "Calibre version: $version"
+          release_id: ${{ steps.create_release.outputs.id }}
           #overwrite: true
           verbose: true
           #tags: true
           draft: false
+          default_release_name: "Test release name for main branch"
