@@ -37,8 +37,14 @@ jobs:
         cd build/calibre.AppDir/usr/bin/
         curl -o - https://download.calibre-ebook.com/$version/calibre-$version-x86_64.txz | tar -xJf -
 
-        cp build/calibre.AppDir/usr/bin/resources/content-server/calibre.png build/calibre.AppDir
+        pwd
+        ls -lah
+        cd ../../../../
+        pwd
+        ls -lah
 
+        cp build/calibre.AppDir/usr/bin/resources/content-server/calibre.png build/calibre.AppDir
+        
         cp README.md build/calibre.AppDir
 
     - name: Get appimagetool
