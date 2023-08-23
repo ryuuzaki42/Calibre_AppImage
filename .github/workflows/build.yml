@@ -72,7 +72,9 @@ jobs:
         set -x
         pwd
         ls -lah
-        version=$(cat version)
+        version=$(grep -o "Calibre:.*" README.md | cut -d ' ' -f2)
+        echo "Calibre version: $version"
+
         mv Calibre-x86_64.AppImage "Calibre-$version-x86_64-1_JB.AppImage"
         md5sum "Calibre-$version-x86_64-1_JB.AppImage" > "Calibre-$version-x86_64-1_JB.AppImage.md5"
         ls -lah
@@ -88,7 +90,7 @@ jobs:
       with:
           file: "Calibre*.AppImage; Calibre*.md5"
           #delete_file: "random-name-*.txt;random-*.txt"
-          release_id: ${{ steps.create_release.outputs.id }}
+          release_id: "Calibre version: $version"
           #overwrite: true
           verbose: true
           #tags: true
