@@ -2,7 +2,7 @@
 # Calibre_AppImage
 
 ## Repository: https://github.com/ryuuzaki42/Calibre_AppImage
-    Calibre: 6.28.1
+    Calibre: 6.29.0
 
 ---
 https://calibre-ebook.com/
