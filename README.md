@@ -1,13 +1,12 @@
 
 # Calibre_AppImage
-
-## Repository: https://github.com/ryuuzaki42/Calibre_AppImage
-    Calibre: 7.1.0
-
----
 https://calibre-ebook.com/
 
-https://calibre-ebook.com/download_linux
+## Repository: https://github.com/ryuuzaki42/Calibre_AppImage
+    Calibre: 7.2.0
 
 ---
 Based on: https://github.com/KushagraKarira/calibre-appimage
+
+---
+https://calibre-ebook.com/download_linux
