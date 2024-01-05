@@ -95,4 +95,4 @@ jobs:
           verbose: true
           #tags: true
           draft: false
-          default_release_name: "Calibre v"
+          default_release_name: "Calibre v in AppImage"
