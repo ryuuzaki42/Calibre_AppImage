@@ -73,9 +73,11 @@ jobs:
 
         ARCH=x86_64 VERSION="${version}-1_JB" ./appimagetool-x86_64.AppImage build/calibre.AppDir
 
-        mv Calibre-x86_64.AppImage "Calibre-$version-x86_64-1_JB.AppImage"
-        md5sum "Calibre-$version-x86_64-1_JB.AppImage" > "Calibre-$version-x86_64-1_JB.AppImage.md5"
-        ls -lah
+        fileName=$(ls Calibre*.AppImage)
+        echo "fileName: $fileName"
+
+        md5sum "$fileName" > "${fileName}.md5"
+        pwd; ls -lah
 
     # Build - Errror: Resource not accessible by integration
     # Change Settings -> Actions -> General -> Workflow Permissions to allow read and write:
