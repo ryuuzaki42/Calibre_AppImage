@@ -62,7 +62,7 @@ jobs:
         #wget -q https://github.com/AppImage/AppImageKit/releases/download/13/appimagetool-x86_64.AppImage
         #wget -q https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage
 
-        version_go_appimage=$(wget -q  -O - https://api.github.com/repos/probonopd/go-appimage/releases | grep "\"name.*appimagetool-.*-x86_64.AppImage\"" | head -n 1 | cut -d '-' -f2)
+        version_go_appimage=$(wget -q -O - https://api.github.com/repos/probonopd/go-appimage/releases | grep "\"name.*appimagetool-.*-x86_64.AppImage\"" | head -n 1 | cut -d '-' -f2)
         echo "version_go_appimage: $version_go_appimage"
 
         wget -q "https://github.com/probonopd/go-appimage/releases/download/continuous/appimagetool-$version_go_appimage-x86_64.AppImage" -O appimagetool-x86_64.AppImage
@@ -88,21 +88,15 @@ jobs:
     # https://github.com/actions/first-interaction/issues/10#issuecomment-1506118886
 
     # https://github.com/marketplace/actions/upload-to-github-release
-    #- uses: xresloader/upload-to-github-release@main
-    #  env:
-    #      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    #  with:
-    #      file: "Calibre*.AppImage; Calibre*.zsync ; Calibre*.md5"
-    #      #delete_file: "random-name-*.txt;random-*.txt"
-    #      release_id: ${{ steps.create_release.outputs.id }}
-    #      #overwrite: true
-    #      verbose: true
-    #      #tags: true
-    #      draft: false
-    #      default_release_name: "Calibre V in AppImage"
-
-    - name: Upload artifact
-      uses: actions/upload-artifact@v4.4.0
+    - uses: xresloader/upload-to-github-release@main
+      env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        name: Calibre*.AppImage #"Calibre*.AppImage; Calibre*.zsync ; Calibre*.md5"
-        path: /home/runner/work/Calibre_AppImage/Calibre_AppImage/ #'dist'
+          file: "Calibre*.AppImage; Calibre*.zsync ; Calibre*.md5"
+          #delete_file: "random-name-*.txt;random-*.txt"
+          release_id: ${{ steps.create_release.outputs.id }}
+          #overwrite: true
+          verbose: true
+          #tags: true
+          draft: false
+          default_release_name: "Calibre V in AppImage"
