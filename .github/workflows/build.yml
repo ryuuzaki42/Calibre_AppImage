@@ -105,4 +105,4 @@ jobs:
       uses: actions/upload-artifact@v4.4.0
       with:
         name: "Calibre*.AppImage; Calibre*.zsync ; Calibre*.md5"
-        path: ./ #'dist'
+        path: /home/runner/work/Calibre_AppImage/Calibre_AppImage/ #'dist'
