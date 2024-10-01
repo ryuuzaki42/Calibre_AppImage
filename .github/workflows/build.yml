@@ -70,7 +70,7 @@ jobs:
 
     - name: Make AppImage
       run:  |
-       set -x
+        set -x
         pwd; ls -lah
         version=$(grep -o "Calibre:.*" README.md | cut -d ' ' -f2)
         echo "Calibre version: $version"
@@ -105,4 +105,4 @@ jobs:
       uses: actions/upload-artifact@v4.4.0
       with:
         name: "Calibre*.AppImage; Calibre*.zsync ; Calibre*.md5"
-        #path: 'dist'
+        path: ./ #'dist'
