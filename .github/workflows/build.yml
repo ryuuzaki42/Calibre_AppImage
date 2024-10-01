@@ -88,15 +88,21 @@ jobs:
     # https://github.com/actions/first-interaction/issues/10#issuecomment-1506118886
 
     # https://github.com/marketplace/actions/upload-to-github-release
-    - uses: xresloader/upload-to-github-release@main
-      env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    #- uses: xresloader/upload-to-github-release@main
+    #  env:
+    #      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    #  with:
+    #      file: "Calibre*.AppImage; Calibre*.zsync ; Calibre*.md5"
+    #      #delete_file: "random-name-*.txt;random-*.txt"
+    #      release_id: ${{ steps.create_release.outputs.id }}
+    #      #overwrite: true
+    #      verbose: true
+    #      #tags: true
+    #      draft: false
+    #      default_release_name: "Calibre V in AppImage"
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v4.4.0
       with:
-          file: "Calibre*.AppImage; Calibre*.zsync ; Calibre*.md5"
-          #delete_file: "random-name-*.txt;random-*.txt"
-          release_id: ${{ steps.create_release.outputs.id }}
-          #overwrite: true
-          verbose: true
-          #tags: true
-          draft: false
-          default_release_name: "Calibre V in AppImage"
+        name: "Calibre*.AppImage; Calibre*.zsync ; Calibre*.md5"
+        #path: 'dist'
