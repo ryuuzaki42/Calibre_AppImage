@@ -22,12 +22,12 @@ jobs:
         version=$(grep -o "Calibre:.*" README.md | cut -d ' ' -f2)
         echo "Calibre version: $version"
 
-        #rm -rf build/
-        mkdir -p build/calibre.AppDir/
+        #rm -rf calibre.AppDir/
+        mkdir -p calibre.AppDir/
 
-        #cp calibre.desktop build/calibre.AppDir/
+        #cp calibre.desktop calibre.AppDir/
 
-        cat > build/calibre.AppDir/calibre.desktop << 'EOF'
+        cat > calibre.AppDir/calibre.desktop << 'EOF'
         [Desktop Entry]
         Type=Application
         Name=Calibre
@@ -38,13 +38,13 @@ jobs:
         Categories=Office;Graphics;Viewer
         EOF
 
-        chmod +x build/calibre.AppDir/calibre.desktop
+        chmod +x calibre.AppDir/calibre.desktop
 
-        curl --location -o build/calibre.AppDir/AppRun https://github.com/AppImage/AppImageKit/releases/download/continuous/AppRun-x86_64
-        chmod +x build/calibre.AppDir/AppRun
+        curl --location -o calibre.AppDir/AppRun https://github.com/AppImage/AppImageKit/releases/download/continuous/AppRun-x86_64
+        chmod +x calibre.AppDir/AppRun
 
-        mkdir -p build/calibre.AppDir/usr/bin/
-        cd build/calibre.AppDir/usr/bin/
+        mkdir -p calibre.AppDir/usr/bin/
+        cd calibre.AppDir/usr/bin/
         curl -o - https://download.calibre-ebook.com/$version/calibre-$version-x86_64.txz | tar -xJf -
 
         pwd
@@ -53,8 +53,8 @@ jobs:
         pwd
         ls -lah
 
-        cp build/calibre.AppDir/usr/bin/resources/content-server/calibre.png build/calibre.AppDir
-        cp README.md build/calibre.AppDir
+        cp calibre.AppDir/usr/bin/resources/content-server/calibre.png calibre.AppDir
+        cp README.md calibre.AppDir
 
     - name: Get appimagetool
       run: |
@@ -75,7 +75,7 @@ jobs:
         version=$(grep -o "Calibre:.*" README.md | cut -d ' ' -f2)
         echo "Calibre version: $version"
 
-        ARCH=x86_64 VERSION="${version}-1_JB" ./appimagetool-x86_64.AppImage build/calibre.AppDir
+        ARCH=x86_64 VERSION="${version}-1_JB" ./appimagetool-x86_64.AppImage calibre.AppDir
 
         fileName=$(ls Calibre*.AppImage)
         echo "fileName: $fileName"
