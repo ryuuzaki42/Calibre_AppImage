@@ -40,7 +40,15 @@ jobs:
 
         chmod +x calibre.AppDir/calibre.desktop
 
-        curl --location -o calibre.AppDir/AppRun https://github.com/AppImage/AppImageKit/releases/download/continuous/AppRun-x86_64
+        cat > calibre.AppDir/AppRun << 'EOF'
+        #!/bin/bash
+        HERE="$(dirname "$(readlink -f "${0}")")"
+
+        cd /"$HERE"/usr/bin/
+        ./calibre
+        EOF
+
+        #curl --location -o calibre.AppDir/AppRun https://github.com/AppImage/AppImageKit/releases/download/continuous/AppRun-x86_64
         chmod +x calibre.AppDir/AppRun
 
         mkdir -p calibre.AppDir/usr/bin/
