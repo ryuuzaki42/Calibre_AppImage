@@ -96,7 +96,7 @@ jobs:
         #ARCH=x86_64 VERSION="${version}-1_JB" ./appimagetool-x86_64.AppImage calibre.AppDir
 
         tag_version=1
-        name_prog="Zotero-${version}-${tag_version}_JB-x86_64.AppImage"
+        name_prog="Calibre-${version}-${tag_version}_JB-x86_64.AppImage"
 
         # Add update information to runtime
         UPINFO="gh-releases-zsync|$(echo "$GITHUB_REPOSITORY" | tr '/' '|')|latest|*dwarfs-$ARCH.AppImage.zsync"
