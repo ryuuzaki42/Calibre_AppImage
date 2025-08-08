@@ -10,7 +10,8 @@ on:
 jobs:
   build:
     name: Build
-    runs-on: ubuntu-latest
+    #runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
     - uses: actions/checkout@master
     - name: Install fuse libfuse2
