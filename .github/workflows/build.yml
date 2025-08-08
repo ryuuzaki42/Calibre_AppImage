@@ -10,8 +10,8 @@ on:
 jobs:
   build:
     name: Build
-    #runs-on: ubuntu-latest
-    runs-on: ubuntu-22.04
+    #runs-on: ubuntu-22.04 # Use program pre-built, don't make difference witch Ubuntu version
+    runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@master
     - name: Install fuse libfuse2
@@ -56,11 +56,9 @@ jobs:
         cd calibre.AppDir/usr/bin/
         curl -o - https://download.calibre-ebook.com/$version/calibre-$version-x86_64.txz | tar -xJf -
 
-        pwd
-        ls -lah
+        pwd; ls -lah
         cd ../../../
-        pwd
-        ls -lah
+        pwd; ls -lah
 
         cp calibre.AppDir/usr/bin/resources/content-server/calibre.png calibre.AppDir
         cp README.md calibre.AppDir
