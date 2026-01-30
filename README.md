@@ -3,7 +3,7 @@
 https://calibre-ebook.com/
 
 ## Repository: https://github.com/ryuuzaki42/Calibre_AppImage
-    Calibre: 8.16.2
+    Calibre: 9.0.0
 
 ---
 Based on: https://github.com/KushagraKarira/calibre-appimage
