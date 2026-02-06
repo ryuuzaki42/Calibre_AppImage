@@ -23,10 +23,7 @@ jobs:
         version=$(grep -o "Calibre:.*" README.md | cut -d ' ' -f2)
         echo "Calibre version: $version"
 
-        #rm -rf calibre.AppDir/
         mkdir -p calibre.AppDir/
-
-        #cp calibre.desktop calibre.AppDir/
 
         cat > calibre.AppDir/calibre.desktop << 'EOF'
         [Desktop Entry]
@@ -38,7 +35,6 @@ jobs:
         MimeType=application/x-mobipocket-ebook;application/epub+zip;x-content/ebook-reader
         Categories=Office;Graphics;Viewer
         EOF
-
         chmod +x calibre.AppDir/calibre.desktop
 
         cat > calibre.AppDir/AppRun << 'EOF'
@@ -48,20 +44,17 @@ jobs:
         cd /"$HERE"/usr/bin/
         ./calibre
         EOF
-
-        #curl --location -o calibre.AppDir/AppRun https://github.com/AppImage/AppImageKit/releases/download/continuous/AppRun-x86_64
         chmod +x calibre.AppDir/AppRun
 
         mkdir -p calibre.AppDir/usr/bin/
         cd calibre.AppDir/usr/bin/
         curl -o - https://download.calibre-ebook.com/$version/calibre-$version-x86_64.txz | tar -xJf -
-
         pwd; ls -lah
+
         cd ../../../
+        cp calibre.AppDir/usr/bin/resources/content-server/calibre.png calibre.AppDir/
+        cp README.md calibre.AppDir/
         pwd; ls -lah
-
-        cp calibre.AppDir/usr/bin/resources/content-server/calibre.png calibre.AppDir
-        cp README.md calibre.AppDir
 
     #- name: Get appimagetool
     #  run: |
@@ -79,7 +72,7 @@ jobs:
       run: |
         set -x
         wget https://github.com/VHSgunzo/uruntime/releases/latest/download/uruntime-appimage-dwarfs-x86_64 -O uruntime
-        chmod +x ./uruntime
+        chmod +x uruntime
         pwd; ls -lah
 
     - name: Install llvm - URUNTIME
