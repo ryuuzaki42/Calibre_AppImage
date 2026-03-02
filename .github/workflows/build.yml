@@ -32,16 +32,13 @@ jobs:
         Exec=calibre %F
         Icon=calibre
         MimeType=application/x-mobipocket-ebook;application/epub+zip;x-content/ebook-reader
-        Categories=Office;Graphics;Viewer
-        '> calibre.AppDir/calibre.desktop
+        Categories=Office;Graphics;Viewer'> calibre.AppDir/calibre.desktop
         chmod +x calibre.AppDir/calibre.desktop
 
         echo '#!/bin/bash
         HERE="$(dirname "$(readlink -f "${0}")")"
-
         cd /"$HERE"/usr/bin/
-        ./calibre
-        '> calibre.AppDir/AppRun
+        ./calibre'> calibre.AppDir/AppRun
         chmod +x calibre.AppDir/AppRun
 
         mkdir -p calibre.AppDir/usr/bin/
