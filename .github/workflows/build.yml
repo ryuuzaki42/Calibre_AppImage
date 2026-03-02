@@ -25,8 +25,7 @@ jobs:
 
         mkdir -p calibre.AppDir/
 
-        cat > calibre.AppDir/calibre.desktop << EOF
-        [Desktop Entry]
+        echo '[Desktop Entry]
         Type=Application
         Name=Calibre
         Comment=E-Book Management
@@ -34,16 +33,15 @@ jobs:
         Icon=calibre
         MimeType=application/x-mobipocket-ebook;application/epub+zip;x-content/ebook-reader
         Categories=Office;Graphics;Viewer
-        EOF
+        '> calibre.AppDir/calibre.desktop
         chmod +x calibre.AppDir/calibre.desktop
 
-        cat > calibre.AppDir/AppRun << 'EOF'
-        #!/bin/bash
+        echo '#!/bin/bash
         HERE="$(dirname "$(readlink -f "${0}")")"
 
         cd /"$HERE"/usr/bin/
         ./calibre
-        EOF
+        '> calibre.AppDir/AppRun
         chmod +x calibre.AppDir/AppRun
 
         mkdir -p calibre.AppDir/usr/bin/
