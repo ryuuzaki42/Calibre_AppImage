@@ -11,7 +11,8 @@ jobs:
   build:
     name: Build
     #runs-on: ubuntu-22.04 # Use program pre-built, don't make difference witch Ubuntu version
-    runs-on: ubuntu-latest
+    #runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
     - uses: actions/checkout@master
     - name: Install fuse and libfuse2
@@ -50,6 +51,12 @@ jobs:
         cd ../
         ln -s calibre/resources/content-server/calibre.png calibre.png
         cp ../README.md .
+        pwd; ls -lah
+
+        ## Add libxcb-cursor from Ubuntu
+        cd calibre/lib/
+        wget https://github.com/ryuuzaki42/Calibre_AppImage/releases/download/9.4.1/libxcb-cursor.so.0.0.0
+        ln -s libxcb-cursor.so.0.0.0 libxcb-cursor.so.0
         pwd; ls -lah
 
     #- name: Get appimagetool
