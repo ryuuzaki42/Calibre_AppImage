@@ -14,16 +14,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@master
-    - name: Install fuse libfuse2
+    - name: Install fuse and libfuse2
       run: sudo apt install fuse libfuse2
 
-    - name: Make Calibre AppDir
+    - name: Make Calibre AppDir/
       run: |
         set -x
         version=$(grep -o "Calibre:.*" README.md | cut -d ' ' -f2)
         echo "Calibre version: $version"
 
-        mkdir -p calibre.AppDir/
+        mkdir calibre.AppDir/
+        cd calibre.AppDir/
 
         echo '[Desktop Entry]
         Type=Application
@@ -32,21 +33,21 @@ jobs:
         Exec=calibre %F
         Icon=calibre
         MimeType=application/x-mobipocket-ebook;application/epub+zip;x-content/ebook-reader
-        Categories=Office;Graphics;Viewer'> calibre.AppDir/calibre.desktop
-        chmod +x calibre.AppDir/calibre.desktop
+        Categories=Office;Graphics;Viewer' > Calibre.desktop
+        chmod +x Calibre.desktop
 
         echo '#!/bin/bash
         HERE="$(dirname "$(readlink -f "${0}")")"
-        cd /"$HERE"/usr/bin/
-        ./calibre'> calibre.AppDir/AppRun
-        chmod +x calibre.AppDir/AppRun
+        cd /"$HERE"/calibre/
+        ./calibre' > AppRun
+        chmod +x AppRun
 
-        mkdir -p calibre.AppDir/usr/bin/
-        cd calibre.AppDir/usr/bin/
+        mkdir -p calibre/
+        cd calibre/
         curl -o - https://download.calibre-ebook.com/$version/calibre-$version-x86_64.txz | tar -xJf -
         pwd; ls -lah
 
-        cd ../../../
+        cd ../../
         cp calibre.AppDir/usr/bin/resources/content-server/calibre.png calibre.AppDir/
         cp README.md calibre.AppDir/
         pwd; ls -lah
@@ -109,10 +110,6 @@ jobs:
 
         md5sum "$fileName" > "${fileName}.md5"
         pwd; ls -lah
-
-    # Build - Errror: Resource not accessible by integration
-    # Change Settings -> Actions -> General -> Workflow Permissions to allow read and write:
-    # https://github.com/actions/first-interaction/issues/10#issuecomment-1506118886
 
     # https://github.com/marketplace/actions/upload-to-github-release
     - uses: xresloader/upload-to-github-release@main
