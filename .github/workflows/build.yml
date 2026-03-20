@@ -13,6 +13,7 @@ jobs:
     #runs-on: ubuntu-22.04 # Use program pre-built, don't make difference witch Ubuntu version
     #runs-on: ubuntu-latest
     runs-on: ubuntu-24.04
+
     steps:
     - uses: actions/checkout@v6
     - name: Install fuse and libfuse2
@@ -55,7 +56,7 @@ jobs:
 
         ## Add libxcb-cursor from Ubuntu
         cd calibre/lib/
-        wget https://github.com/ryuuzaki42/Calibre_AppImage/releases/download/main-00000000/libxcb-cursor.so.0.0.0
+        wget -q https://github.com/ryuuzaki42/Calibre_AppImage/releases/download/main-00000000/libxcb-cursor.so.0.0.0
         ln -s libxcb-cursor.so.0.0.0 libxcb-cursor.so.0
         pwd; ls -lah
 
@@ -73,7 +74,7 @@ jobs:
     - name: Get URUNTIME
       run: |
         set -x
-        wget https://github.com/VHSgunzo/uruntime/releases/latest/download/uruntime-appimage-dwarfs-x86_64 -O uruntime
+        wget -q https://github.com/VHSgunzo/uruntime/releases/latest/download/uruntime-appimage-dwarfs-x86_64 -O uruntime
         chmod +x uruntime
         pwd; ls -lah
 
@@ -116,12 +117,11 @@ jobs:
         md5sum "$fileName" > "${fileName}.md5"
         pwd; ls -lah
 
-    # https://github.com/marketplace/actions/upload-to-github-release
     - uses: xresloader/upload-to-github-release@v1
       env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-          file: "Calibre*.AppImage; Calibre*.zsync ; Calibre*.md5"
+          file: "Calibre*.AppImage; Calibre*.zsync; Calibre*.md5"
           #overwrite: true
           verbose: true
           draft: false
