@@ -139,7 +139,7 @@ jobs:
         echo "Generating zsync file..."
         zsyncmake *.AppImage -u *.AppImage
 
-        fileName=$(ls Calibre*.AppImage)
+        fileName=$(ls Calibre*_JB*.AppImage)
         echo "fileName: $fileName"
         md5sum "$fileName" > "${fileName}.md5"
         pwd; ls -lah
