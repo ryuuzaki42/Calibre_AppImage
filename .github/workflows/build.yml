@@ -94,6 +94,11 @@ jobs:
         # Bundle the application
         ./quick-sharun ./calibre.AppDir/calibre/calibre
 
+        ./quick-sharun \
+            /lib/x86_64-linux-gnu/libc.so.*
+
+        find / | grep "libc"
+        
         # Create the AppImage
         ./quick-sharun --make-appimage
         pwd; ls -lah
