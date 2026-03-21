@@ -71,6 +71,31 @@ jobs:
     #    wget -q "https://github.com/probonopd/go-appimage/releases/download/continuous/appimagetool-$version_go_appimage-x86_64.AppImage" -O appimagetool-x86_64.AppImage
     #    chmod +x appimagetool-x86_64.AppImage
 
+    - name: Sharun
+      run: |
+        ARCH="$(uname -m)"
+        SHARUN="https://raw.githubusercontent.com/pkgforge-dev/Anylinux-AppImages/refs/heads/main/useful-tools/quick-sharun.sh"
+
+        # Configure the AppImage
+        #export ICON=/usr/share/icons/hicolor/256x256/apps/myapp.png
+        #export DESKTOP=/usr/share/applications/myapp.desktop
+        #export OUTPATH=./dist
+        #export OUTNAME=myapp-"$ARCH".AppImage
+
+        # Install your application (example using pacman)
+        #pacman -Syu --noconfirm base-devel wget myapp
+
+        # Download and run quick-sharun
+        wget "$SHARUN" -O ./quick-sharun
+        chmod +x ./quick-sharun
+
+        # Bundle the application
+        ./quick-sharun calibre.AppDir/calibre/calibre
+
+        # Create the AppImage
+        ./quick-sharun --make-appimage
+        pwd; ls -lah
+
     - name: Get URUNTIME
       run: |
         set -x
