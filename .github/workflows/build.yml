@@ -90,6 +90,8 @@ jobs:
         wget "$SHARUN" -O ./quick-sharun
         chmod +x ./quick-sharun
 
+        rm calibre.AppDir/AppRun
+
         export APPDIR=./calibre.AppDir/
         # Bundle the application
         ./quick-sharun ./calibre.AppDir/calibre/calibre
