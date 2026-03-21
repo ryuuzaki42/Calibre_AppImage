@@ -90,7 +90,7 @@ jobs:
         chmod +x ./quick-sharun
 
         # Bundle the application
-        ./quick-sharun calibre.AppDir/calibre/calibre
+        ./quick-sharun calibre.AppDir/ #calibre/calibre
 
         # Create the AppImage
         ./quick-sharun --make-appimage
