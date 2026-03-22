@@ -22,7 +22,6 @@ jobs:
     - name: Make Calibre AppDir/
       run: |
         set -x
-        exit 0
         version=$(grep -o "Calibre:.*" README.md | cut -d ' ' -f2)
         echo "Calibre version: $version"
 
@@ -72,48 +71,6 @@ jobs:
     #    wget -q "https://github.com/probonopd/go-appimage/releases/download/continuous/appimagetool-$version_go_appimage-x86_64.AppImage" -O appimagetool-x86_64.AppImage
     #    chmod +x appimagetool-x86_64.AppImage
 
-    - name: Sharun
-      run: |
-        set -x
-        ARCH="$(uname -m)"
-        SHARUN="https://raw.githubusercontent.com/pkgforge-dev/Anylinux-AppImages/refs/heads/main/useful-tools/quick-sharun.sh"
-
-        # Configure the AppImage
-        #export ICON=/usr/share/icons/hicolor/256x256/apps/myapp.png
-        #export DESKTOP=/usr/share/applications/myapp.desktop
-        #export OUTPATH=./dist
-        #export OUTNAME=myapp-"$ARCH".AppImage
-
-        # Install your application (example using pacman)
-        #pacman -Syu --noconfirm base-devel wget myapp
-        sudo apt update
-        sudo apt install calibre
-
-        # Download and run quick-sharun
-        wget "$SHARUN" -O ./quick-sharun
-        chmod +x ./quick-sharun
-
-        #rm calibre.AppDir/AppRun
-
-        #export APPDIR=./calibre.AppDir/
-        export DESKTOP=/usr/share/applications/calibre-gui.desktop
-        ls /usr/share/applications/*.desktop
-
-        # Bundle the application
-        #./quick-sharun ./calibre.AppDir/calibre/calibre
-        ./quick-sharun /usr/bin/calibre
-
-        #./quick-sharun \
-        #    /lib/x86_64-linux-gnu/libc.so.*
-
-        ./quick-sharun /usr/bin/python3*
-
-        #find / | grep "libc"
-
-        # Create the AppImage
-        ./quick-sharun --make-appimage
-        pwd; ls -lah
-
     - name: Get URUNTIME
       run: |
         set -x
@@ -127,7 +84,6 @@ jobs:
     - name: Make AppImage
       run:  |
         set -x
-        exit 0
         pwd; ls -lah
         version=$(grep -o "Calibre:.*" README.md | cut -d ' ' -f2)
         echo "Calibre version: $version"
@@ -156,7 +112,7 @@ jobs:
         echo "Generating zsync file..."
         zsyncmake *.AppImage -u *.AppImage
 
-        fileName=$(ls Calibre*_JB*.AppImage)
+        fileName=$(ls Calibre*.AppImage)
         echo "fileName: $fileName"
         md5sum "$fileName" > "${fileName}.md5"
         pwd; ls -lah
@@ -165,9 +121,7 @@ jobs:
       env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-          #file: "Calibre*.AppImage; Calibre*.zsync; Calibre*.md5"
-          #file: "Calibre*.AppImage"
-          file: "calibre*.AppImage"
+          file: "Calibre*.AppImage; Calibre*.zsync; Calibre*.md5"
           #overwrite: true
           verbose: true
           draft: false
