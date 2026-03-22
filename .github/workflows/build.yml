@@ -95,7 +95,7 @@ jobs:
 
         #rm calibre.AppDir/AppRun
 
-        export APPDIR=./calibre.AppDir/
+        #export APPDIR=./calibre.AppDir/
         # Bundle the application
         #./quick-sharun ./calibre.AppDir/calibre/calibre
         ./quick-sharun /usr/bin/calibre
