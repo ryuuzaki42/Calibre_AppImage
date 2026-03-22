@@ -85,6 +85,7 @@ jobs:
 
         # Install your application (example using pacman)
         #pacman -Syu --noconfirm base-devel wget myapp
+        sudo apt update
         sudo apt install calibre
 
         # Download and run quick-sharun
