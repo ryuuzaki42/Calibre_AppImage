@@ -22,6 +22,7 @@ jobs:
     - name: Make Calibre AppDir/
       run: |
         set -x
+        exit 0
         version=$(grep -o "Calibre:.*" README.md | cut -d ' ' -f2)
         echo "Calibre version: $version"
 
@@ -99,8 +100,8 @@ jobs:
         #./quick-sharun ./calibre.AppDir/calibre/calibre
         ./quick-sharun /usr/bin/calibre
 
-        #./quick-sharun \
-        #    /lib/x86_64-linux-gnu/libc.so.*
+        ./quick-sharun \
+            /lib/x86_64-linux-gnu/libc.so.*
 
         #find / | grep "libc"
 
