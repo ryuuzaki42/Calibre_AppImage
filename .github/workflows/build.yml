@@ -164,7 +164,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
           #file: "Calibre*.AppImage; Calibre*.zsync; Calibre*.md5"
-          file: "Calibre*.AppImage"
+          #file: "Calibre*.AppImage"
+          file: "calibre*.AppImage"
           #overwrite: true
           verbose: true
           draft: false
