@@ -96,7 +96,7 @@ jobs:
         #rm calibre.AppDir/AppRun
 
         #export APPDIR=./calibre.AppDir/
-        export DESKTOP=/usr/share/applications/calibre.desktop
+        export DESKTOP=/usr/share/applications/calibre-gui.desktop
         ls /usr/share/applications/*.desktop
 
         # Bundle the application
