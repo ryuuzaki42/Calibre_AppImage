@@ -85,13 +85,13 @@ jobs:
 
         # Install your application (example using pacman)
         #pacman -Syu --noconfirm base-devel wget myapp
-        sudo pacman -Syu calibre
+        sudo apt install calibre
 
         # Download and run quick-sharun
         wget "$SHARUN" -O ./quick-sharun
         chmod +x ./quick-sharun
 
-        rm calibre.AppDir/AppRun
+        #rm calibre.AppDir/AppRun
 
         export APPDIR=./calibre.AppDir/
         # Bundle the application
