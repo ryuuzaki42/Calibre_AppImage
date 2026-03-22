@@ -85,6 +85,7 @@ jobs:
 
         # Install your application (example using pacman)
         #pacman -Syu --noconfirm base-devel wget myapp
+        sudo pacman -Syu calibre
 
         # Download and run quick-sharun
         wget "$SHARUN" -O ./quick-sharun
@@ -94,10 +95,11 @@ jobs:
 
         export APPDIR=./calibre.AppDir/
         # Bundle the application
-        ./quick-sharun ./calibre.AppDir/calibre/calibre
+        #./quick-sharun ./calibre.AppDir/calibre/calibre
+        ./quick-sharun /usr/bin/calibre
 
-        ./quick-sharun \
-            /lib/x86_64-linux-gnu/libc.so.*
+        #./quick-sharun \
+        #    /lib/x86_64-linux-gnu/libc.so.*
 
         #find / | grep "libc"
 
