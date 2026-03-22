@@ -103,8 +103,10 @@ jobs:
         #./quick-sharun ./calibre.AppDir/calibre/calibre
         ./quick-sharun /usr/bin/calibre
 
-        ./quick-sharun \
-            /lib/x86_64-linux-gnu/libc.so.*
+        #./quick-sharun \
+        #    /lib/x86_64-linux-gnu/libc.so.*
+
+        ./quick-sharun /usr/bin/python3*
 
         #find / | grep "libc"
 
