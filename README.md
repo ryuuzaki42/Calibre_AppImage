@@ -1,7 +1,7 @@
 
 # Calibre_AppImage
 
-Calibre is a cross-platform free and open-source suite of e-book software.
+Calibre is a cross-platform free and open-source suite of e-book software
 
 https://calibre-ebook.com/
 
